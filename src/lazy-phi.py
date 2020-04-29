@@ -38,6 +38,7 @@ def simple_phi(n):
 
 	return count
 
+# Show the steps involved in ETF
 def extended_phi(n):
 	# Get product of primes
 	pprod = prime_ladder(n)
@@ -66,8 +67,29 @@ def extended_phi(n):
 	print()
 	answer = simple_phi(n)
 	print("\t= {}".format(answer))
+	return answer
 		 
 	
+
+# Euler's Function
+def eulers(a,n):
+	# check for relative primality
+	if gcd(a,n) != 1:
+		print("{} and {} are not relatively prime".format(a,n))
+		return False
+
+	phi = extended_phi(n)
+	print()
+	if phi != 1:
+		print("\nNow, {}^{} = {}".format(a,phi,a**phi))
+	check = (((a**phi) % n) == 1) 
+	
+	if check:
+		print("{}^{} CONGRUENT 1 (mod {})".format(a,phi,n))
+	else:
+		print("{}^{} NOT CONGRUENT 1 (mod {})".format(a,phi,n))
+
+	return check
 
 def prime_ladder(n):
 	stores = {}
@@ -107,6 +129,10 @@ def main():
 	elif argv[1] == "exphi":
 		n = int(input("n: "))
 		extended_phi(n)
+	elif argv[1] == "euler":
+		a = int(input("a: "))
+		n = int(input("n: "))
+		c = eulers(a,n)
 
 if __name__ == "__main__":
 	main()	
